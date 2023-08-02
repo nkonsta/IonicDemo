@@ -20,11 +20,7 @@ workflows:
             --no-interactive \
             --noresources 
       - name: Build Android Cordova App
-        script: | 
-          ionic cordova build android \
-            --release \
-            --no-interactive \
-            --prod \
-            --device        
+        working_directory: platforms/android
+        script: ./gradlew assembleRelease    
     artifacts:
       - platforms/android/app/build/outputs/**/*.apk
