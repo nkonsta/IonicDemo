@@ -2,7 +2,7 @@ workflows:
   android-workflow:
     name: Building for Android
     environment:
-      java: 1.8
+      node: 16.20.0
     triggering:
       events:
         - push
@@ -20,7 +20,7 @@ workflows:
       - name: Build Android release
         script: |
           set -e # exit on first failed command
-          cordova build android --no-interactive
+          ionic cordova build android --no-interactive
     
     artifacts:
         - platforms/android/app/build/outputs/**/*.apk 
