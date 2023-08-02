@@ -25,6 +25,10 @@ workflows:
           ionic cordova platform add android \
             --confirm \
             --no-interactive \
-            --noresources 
+            --noresources
+      - name: Build Android
+        script: |
+          set -x
+          ionic cordova build android
     artifacts:
       - platforms/android/app/build/outputs/**/*.apk
