@@ -1,22 +1,30 @@
 workflows:
   android-workflow:
-    name: Building for Android
+    name: Ionic Cordova Android Workflow
+    max_build_duration: 120
     environment:
       node: latest
-    # triggering:
-    #   events:
-    #     - push
-    #   branch_patterns: 
-    #     - pattern: main
-    #   cancel_previous_builds: true
     scripts:
-      - name: Install dependencies
-        script: npm i
-      - name: Build Android platform
-        script: |
-          set -e # exit on first failed command
+      - name: Install npm dependencies and update Cordova version
+        script: | 
+          npm install
+          npm ci # equivalent of npm install for CI systems.
+            # Requires package-lock.json or npm-shrinkwrap.json to be present
+          cvm install 9.0.0
+          cvm use 9.0.0 
+      - name: Setup Cordova Android platform
+        script: | 
           ionic cordova platform remove android --nosave
-          ionic cordova build android --confirm --no-interactive --noresources
-    
+          ionic cordova platform add android \
+            --confirm \
+            --no-interactive \
+            --noresources 
+      - name: Build Android Cordova App
+        script: | 
+          ionic cordova build android \
+            --release \
+            --no-interactive \
+            --prod \
+            --device        
     artifacts:
-        - platforms/android/app/build/outputs/**/*.apk 
+      - platforms/android/app/build/outputs/**/*.apk
