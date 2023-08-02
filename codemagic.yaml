@@ -1,6 +1,8 @@
 workflows:
   android-workflow:
     name: Building for Android
+    environment:
+      java: 1.8
     triggering:
       events:
         - push
