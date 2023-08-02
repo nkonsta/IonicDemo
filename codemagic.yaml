@@ -1,0 +1,22 @@
+workflows:
+    android-workflow-id:
+        name: Android Sample Workflow
+          scripts:
+            - name: Install npm dependencies and update Cordova version
+              script: | 
+                npm install
+            - name: Setup Cordova Android platform
+              script: | 
+                ionic cordova platform remove android --nosave
+                ionic cordova platform add android \
+                  --confirm \
+                  --no-interactive \
+                  --noresources 
+    - name: Build Android Cordova App
+      script: | 
+        ionic cordova build android \
+          --no-interactive \
+          --prod \
+          --device
+    artifacts:
+      - platforms/android/app/build/outputs/**/*.apk 
