@@ -2,25 +2,21 @@ workflows:
   android-workflow:
     name: Building for Android
     environment:
-      node: 16.20.0
-    triggering:
-      events:
-        - push
-      branch_patterns: 
-        - pattern: main
-      cancel_previous_builds: true
+      node: latest
+    # triggering:
+    #   events:
+    #     - push
+    #   branch_patterns: 
+    #     - pattern: main
+    #   cancel_previous_builds: true
     scripts:
       - name: Install dependencies
         script: npm i
-      - name: Add Android platform
+      - name: Build Android platform
         script: |
           set -e # exit on first failed command
           ionic cordova platform remove android --nosave
-          ionic cordova platform add android --confirm --no-interactive --noresources
-      - name: Build Android release
-        script: |
-          set -e # exit on first failed command
-          ionic cordova build android --no-interactive
+          ionic cordova build android --confirm --no-interactive --noresources
     
     artifacts:
         - platforms/android/app/build/outputs/**/*.apk 
