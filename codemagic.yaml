@@ -3,12 +3,12 @@ workflows:
     name: Building for Android
     scripts:
       - name: Install dependencies
-        script: npm ci
+        script: npm i
       - name: Add Android platform
         script: |
           set -e # exit on first failed command
-          cordova platform remove android --nosave
-          cordova platform add android --confirm --no-interactive --noresources
+          ionic cordova platform remove android --nosave
+          ionic cordova platform add android --confirm --no-interactive --noresources
       - name: Build Android release
         script: |
           set -e # exit on first failed command
