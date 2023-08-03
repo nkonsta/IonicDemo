@@ -17,13 +17,17 @@ workflows:
         script: |
           set -x
           ionic cordova platform remove android --nosave
-          ionic cordova platform add android \
+          ionic cordova platform add android@11.0.0 \
             --confirm \
-            --no-interactive \
-            --noresources
+            --no-interactive
+          ionic cordova prepare android
       - name: Build Android
         script: |
           set -x
-          ionic cordova build android
+          ionic cordova build android \
+          --release \
+          --no-interactive \
+          --prod \
+          --device
     artifacts:
       - platforms/android/app/build/outputs/**/*.apk
