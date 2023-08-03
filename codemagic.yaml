@@ -9,8 +9,6 @@ workflows:
       - name: Install dependencies
         script: |
           npm install
-          npm ci ci # equivalent of npm install for CI systems.
-            # Requires package-lock.json or npm-shrinkwrap.json to be present
           cvm install 9.0.0
           cvm use 9.0.0
       - name: Add Android platform
@@ -25,8 +23,8 @@ workflows:
         script: |
           set -x
           ionic cordova build android \
+          --debug \
           --no-interactive \
-          --prod \
           --device
     artifacts:
       - platforms/android/app/build/outputs/**/*.apk
