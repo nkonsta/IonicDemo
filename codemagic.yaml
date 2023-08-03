@@ -1,6 +1,12 @@
 workflows:
   android-workflow:
     name: Android workflow
+    triggering:
+      events:
+        - push
+      branch_patterns: 
+        - pattern: main
+      cancel_previous_builds: true
     environment:
       xcode: 14.3.1
       node: 16.20.0
