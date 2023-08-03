@@ -25,7 +25,6 @@ workflows:
         script: |
           set -x
           ionic cordova build android \
-          --release \
           --no-interactive \
           --prod \
           --device
