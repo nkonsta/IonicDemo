@@ -5,10 +5,10 @@ workflows:
       xcode: 14.3.1
       node: 16.20.0
       npm: 8.19.4
-      cordova: 12.0.0 
     scripts:
       - name: Install dependencies
         script: |
+          npm i -g cordova@12.0.0
           npm install
           cvm install 9.0.0
           cvm use 9.0.0
